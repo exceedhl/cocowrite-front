@@ -26,26 +26,28 @@ define [
   
     events: 
       'click #create-project': 'createProject'
+
+    messageContainer: ->
+      @$("#message")
   
+    showMessage: (message, type) ->
+      new MessageView
+        message: message
+        type: type
+        container: @messageContainer()
+      
     createProject: (event) ->
       @disableSubmit true
-      spinner = new SpinnerView container: @$("#message")
+      spinner = new SpinnerView container: @messageContainer()
       project = new Project 'repo': @$('#project-github-url').val()
-      that = @
       project.save()
-        .done (res) ->
-          new MessageView
-            message: "Your project has been created successfully! <a style='text-decoration: underline; color: #27ae60' href='{{url 'projects#show' '" + JSON.parse(res).uuid + "'}}'>Go to take a look</a>."
-            type: 'success'
-            container: '#message'
-        .fail (res) ->
-          new MessageView
-            message: JSON.parse(res.responseText).error
-            type: 'error'
-            container: '#message'
-        .always (res) ->
+        .done (res) =>
+          @showMessage "Your project has been created successfully! <a style='text-decoration: underline; color: #27ae60' href='{{url 'projects#show' '" + JSON.parse(res).uuid + "'}}'>Go to take a look</a>.", 'success'
+        .fail (res) =>
+          @showMessage JSON.parse(res.responseText).error, 'error'
+        .always (res) =>
           spinner.dispose()
-          that.disableSubmit(false)
+          @disableSubmit false
   
     disableSubmit: (disabled = true) -> 
       button = @$('#create-project')
