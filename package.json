@@ -1,0 +1,21 @@
+{
+  "author": "Huang Liang",
+  "name": "cocowrite-front-end-app",
+  "description": "cocowrite front-end app",
+  "version": "0.0.1",
+  "homepage": "www.cocowrite.com",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "0.4.1",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-compass": "~0.5.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-http-server": "0.0.2",
+    "grunt-exec": "~0.4.2"
+  }
+}

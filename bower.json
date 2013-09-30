@@ -1,0 +1,27 @@
+{
+  "name": "example-app",
+  "version": "0.1.0",
+  "main": "public/javascripts/app.js",
+  "dependencies": {
+    "chaplin": "~0.11.0",
+    "console-polyfill": "~0.1.0",
+    "lodash": "~2.1.0",
+    "jquery": "~2.0.2",
+    "normalize-css": "~2.1.2",
+    "h5bp-helpers": "~0.1.0",
+    "groundwork": "~2.0.7",
+    "requirejs": "~2.1.8",
+    "requirejs-hbs": "*",
+    "handlebars": "~1.0.0",
+    "requirejs-text": "~2.0.10"
+  },
+  "overrides": {
+    "backbone": {
+      "dependencies": {
+        "lodash": "*",
+        "jquery": "*"
+      },
+      "main": "backbone.js"
+    }
+  }
+}
