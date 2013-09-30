@@ -1,5 +1,5 @@
 requirejs.config
-  baseUrl: './js/'
+  baseUrl: '/js/'
   paths:
     jquery: '../bower_components/jquery/jquery',
     underscore: '../bower_components/lodash/dist/lodash',

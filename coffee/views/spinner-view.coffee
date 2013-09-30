@@ -4,7 +4,6 @@ define [
   ], (View, template) ->
 
   class SpinnerView extends View
-    autoRender: true
     containerMethod: 'html'
     className: 'spinner'
     template: template

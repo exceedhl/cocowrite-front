@@ -5,3 +5,6 @@ define [
 
   class Application extends Chaplin.Application
     title: 'cocowrite'
+  
+    initialize: ->
+      super

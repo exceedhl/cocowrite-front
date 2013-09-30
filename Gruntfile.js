@@ -73,28 +73,29 @@ module.exports = function(grunt) {
 		files: 'bower.json',
 		tasks: ['exec:bower']
 	    }
-	},
+	}
 	
-	'http-server': {
-            'dev': {
-		root: 'build',
-		port: 8000,
-		host: "127.0.0.1",
-		cache: 0,
-		showDir : true,
-		autoIndex: true,
-		defaultExt: "html",
-		runInBAckground: false
-            }
-        }
     });
     
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-http-server');
     grunt.loadNpmTasks('grunt-exec');
     
     grunt.registerTask('default', ['exec:clean', 'compass', 'coffee', 'copy']);
+    
+    grunt.registerTask('server', 'http serving build dir with pushstate support', function() {
+	var server = require('./node_utils/pushstate-server');
+	server.setPort(8000);
+	server.setDirectory('./build');
+	server.start();
+	
+	var done = this.async();
+	process.on('SIGINT', function () {
+	    console.log('http-server stopped');
+	    done();
+	    process.exit();
+	});
+    });
 };

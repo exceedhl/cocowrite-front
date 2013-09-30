@@ -7,7 +7,6 @@ define [
   
   class MessageView extends View
     className: 'box gap-bottom'
-    autoRender: true
   
     initialize: (options) ->
       super
@@ -22,7 +21,6 @@ define [
   class NewProjectView extends View
     className: 'new-project'
     template: template
-    autoRender: true
   
     events: 
       'click #create-project': 'createProject'
@@ -52,7 +50,7 @@ define [
     disableSubmit: (disabled = true) -> 
       button = @$('#create-project')
       if disabled
-        button.attr('disabled')
+        button.attr('disabled', 'true')
       else
         button.removeAttr('disabled')
         
