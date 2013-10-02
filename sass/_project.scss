@@ -51,7 +51,7 @@
 }
 
 #project .path {
-  padding: 1em 12px;
+  padding: 0 12px;
   background-color: white;
   color: #2ecc71;
   font-size: 1.2em;
@@ -59,8 +59,14 @@
 }
 
 #project .path a {
+  line-height: 3em;
   color: #27ae60;
   text-decoration: none;
+}
+
+#project .doclist {
+  overflow: auto;
+  height: 100%;
 }
 
 #project .doc {
@@ -86,4 +92,3 @@
   padding-bottom: 6em;
   padding-top: 2em;
 }
-

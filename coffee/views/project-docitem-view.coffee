@@ -15,4 +15,4 @@ define [
   
     selectDoc: (event) ->
       if @model.get('type') is 'dir'
-        @publishEvent('doc:selected', this.model)
+        @publishEvent('dir:selected', this.model)

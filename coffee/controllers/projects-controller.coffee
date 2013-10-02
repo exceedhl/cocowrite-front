@@ -4,17 +4,28 @@ define [
   'views/project-view',
   'views/project-meta-view',
   'views/project-doclist-view',
+  'views/project-path-view',
   'models/project',
   'models/documents'
-], (Chaplin, NewProjectView, ProjectView, ProjectMetaView, ProjectDocListView, Project, Documents) ->
+], (Chaplin,
+  NewProjectView,
+  ProjectView,
+  ProjectMetaView,
+  ProjectDocListView,
+  ProjectPathView,
+  Project,
+  Documents) ->
 
   class ProjectsController extends Chaplin.Controller
   
     initialize: ->
-      @subscribeEvent 'doc:selected', @selectDoc
+      @subscribeEvent 'dir:selected', @selectDoc
   
     selectDoc: (model) ->
-      @documents.downPath(model.get('name'))
+      @documents.pushPath(model.get('name'))
+      @documents.fetch()
+  
+    selectPath: =>
       @documents.fetch()
 
     new: (params) ->
@@ -26,6 +37,7 @@ define [
         container: 'body'
       project = new Project uuid: params.uuid
       @documents = new Documents project: project
+      @documents.paths.on 'change:paths', @selectPath, @
       project.fetch()
         .done (res) =>
           new ProjectMetaView model: project, container: '#project .meta'
@@ -33,6 +45,9 @@ define [
             .done (res) =>
               new ProjectDocListView
                 collection: @documents
-                container: '#project .docItems'
+                container: '#project .doclist'
+              new ProjectPathView
+                model: @documents.paths
+                container: '#project .path'
     
             
