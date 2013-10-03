@@ -30,7 +30,10 @@ define [
     initialize: (options) ->
       @project = options.project
       @paths = new Paths
+      @paths.on 'change:paths', @selectPath, @
   
     pushPath: (name) ->
       @paths.push name
       
+    selectPath: =>
+      @fetch()

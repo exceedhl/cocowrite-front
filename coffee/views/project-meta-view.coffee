@@ -6,5 +6,8 @@ define [
   class ProjectMetaView extends View
     template: template
   
+    initialize: ->
+      @model.on 'change', @render, @
+  
     getTemplateData: ->
       @model.attributes
