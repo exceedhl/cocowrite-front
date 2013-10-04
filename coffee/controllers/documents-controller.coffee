@@ -53,7 +53,7 @@ define [
       @documentContent.fetch({dataType: 'html', headers: {'Accept' :'application/vnd.github.VERSION.raw'}})
         .done =>
           @documentView = new DocumentView model: @documentContent, container: '#doc'
-      filepath = unless filepath? then @_getFilePath(model.get('name'))
+      filepath = unless filepath? then @_getFilePath(model.get('name')) else filepath
       @_changeURL 'showDocument', {uuid: @project.get('uuid'), filepath: filepath}
   
     _changeURL: (route, params) ->
