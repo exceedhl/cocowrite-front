@@ -47,13 +47,17 @@ define [
     initialize: ->
       @subscribeEvent 'file:selected', @_showFile
 
-    _showFile: (model) =>
+    _showFile: (model, filepath = null) =>
       @documentView.dispose() if @documentView?
       @documentContent = new DocumentContent document: model, project: @project
       @documentContent.fetch({dataType: 'html', headers: {'Accept' :'application/vnd.github.VERSION.raw'}})
         .done =>
           @documentView = new DocumentView model: @documentContent, container: '#doc'
-      Chaplin.mediator.execute('router:changeURL', Chaplin.helpers.reverse('showDocument', {uuid: @project.get('uuid'), filepath: @_getFilePath(model.get('name'))}))
+      filepath = unless filepath? then @_getFilePath(model.get('name'))
+      @_changeURL 'showDocument', {uuid: @project.get('uuid'), filepath: filepath}
+  
+    _changeURL: (route, params) ->
+      Chaplin.mediator.execute 'router:changeURL', Chaplin.helpers.reverse(route, params)
 
     _getFilePath: (name) ->
       paths = _.clone(@documents.paths.get('paths'))
@@ -62,6 +66,6 @@ define [
     
     show: (params) ->
       document = new Document path: params['filepath'], project: @project
-      document.fetch().done => @_showFile(document)
+      document.fetch().done => @_showFile(document, params['filepath'])
 
     index: (params) ->

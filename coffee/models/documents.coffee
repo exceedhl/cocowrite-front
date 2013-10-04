@@ -9,7 +9,7 @@ define [
     
     initialize: ->
       lastPaths = localStorage.getItem('lastPaths')
-      @set paths: if lastPaths? then lastPaths.split('/') else []
+      @set paths: if lastPaths? and lastPaths isnt '' then lastPaths.split('/') else []
       @on 'change:paths', @storeLastPaths, @
 
     storeLastPaths: =>
