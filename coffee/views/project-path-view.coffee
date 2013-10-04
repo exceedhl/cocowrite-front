@@ -11,6 +11,7 @@ define [
       'click a': 'selectPath'
   
     initialize: ->
+      super
       @model.on('change:paths', @render, @)
   
     getTemplateData: ->
@@ -18,3 +19,4 @@ define [
 
     selectPath: (event) ->
       @model.jumpToPath @$(event.currentTarget).data('id')
+

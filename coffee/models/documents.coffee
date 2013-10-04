@@ -8,7 +8,12 @@ define [
   class Paths extends Model
     
     initialize: ->
-      @set paths: []
+      lastPaths = localStorage.getItem('lastPaths')
+      @set paths: if lastPaths? then lastPaths.split('/') else []
+      @on 'change:paths', @storeLastPaths, @
+
+    storeLastPaths: =>
+      localStorage.setItem 'lastPaths', @get('paths').join('/')
   
     push: (path) ->
       @get('paths').push(path)

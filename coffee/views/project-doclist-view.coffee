@@ -9,3 +9,10 @@ define [
   
     animationDuration: 0
   
+    initialize: ->
+      super
+      @subscribeEvent 'dir:selected', @selectDoc
+  
+    selectDoc: (model) ->
+      @collection.pushPath(model.get('name'))
+      @collection.fetch()

@@ -40,7 +40,7 @@ define [
       project = new Project 'repo': @$('#project-github-url').val()
       project.save()
         .done (res) =>
-          @showMessage "Your project has been created successfully! <a style='text-decoration: underline; color: #27ae60' href='{{url 'projects#show' '" + JSON.parse(res).uuid + "'}}'>Go to take a look</a>.", 'success'
+          @showMessage "Your project has been created successfully! <a style='text-decoration: underline; color: #27ae60' href='{{url 'documents#index' '" + JSON.parse(res).uuid + "'}}'>Go to take a look</a>.", 'success'
         .fail (res) =>
           @showMessage JSON.parse(res.responseText).error, 'error'
         .always (res) =>

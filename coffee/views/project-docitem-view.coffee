@@ -1,9 +1,7 @@
 define [
-  'chaplin',
   'views/base/view',
-  'views/document-view'
   'hbs!views/templates/project-docitem'
-  ], (Chaplin, View, DocumentView, template) ->
+  ], (View, template) ->
 
   class ProjectDocItemView extends View
   
@@ -19,4 +17,4 @@ define [
         @publishEvent('dir:selected', this.model)
       else
         @$el.addClass('current')
-        new DocumentView document: @model, container: '#doc'
+        @publishEvent('file:selected', this.model)

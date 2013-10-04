@@ -4,10 +4,8 @@ define [
 
   class DocumentView extends View
 
+    tagName: 'pre'
     template: "{{content}}"
 
-    initialize: (options) ->
-      @document = options.document
-
     getTemplateData: ->
-      content: "hello, world"
+      @model.attributes
