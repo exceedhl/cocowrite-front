@@ -48,6 +48,7 @@ define [
       @subscribeEvent 'file:selected', @_showFile
 
     _showFile: (model, filepath = null) =>
+      console.log "showing file: " + model.get('name')
       @documentView.dispose() if @documentView?
       @documentContent = new DocumentContent document: model, project: @project
       @documentContent.fetch({dataType: 'html', headers: {'Accept' :'application/vnd.github.VERSION.raw'}})
@@ -65,6 +66,7 @@ define [
       encodeURIComponent(paths.join('/'))
     
     show: (params) ->
+      console.log "routed to DC show: " + params['filepath']
       document = new Document path: params['filepath'], project: @project
       document.fetch().done => @_showFile(document, params['filepath'])
 

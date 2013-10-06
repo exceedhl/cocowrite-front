@@ -22,7 +22,3 @@ define [
         options = options || {}
         options.url = model.methodUrl(method.toLowerCase())()
       Backbone.sync(method, model, options);
-  
-    parse: (res) ->
-      JSON.parse(res)
-
