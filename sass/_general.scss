@@ -6,14 +6,14 @@ html, body
 }
 
 #header {
-  position: fixed;
   height: 48px;
   z-index: 1000;
 }
 
 .content {
-  padding-top: 48px;
-  height: 100%;
+  position: absolute;
+  top: 48px;
+  bottom: 0;
 }
 
 
@@ -35,22 +35,6 @@ html, body
   font-size: 5em;
   text-align: center;
   padding-top: 100px;
-}
-
-#toolbar {
-  height: 100%;
-  color: white;
-  background-color: #34495e;
-  padding: 12px 2em;
-  font-weight:100;
-}
-
-#toolbar a {
-  color: #2ecc71;
-}
-
-#toolbar a.active {
-  text-decoration: underline;
 }
 
 .spinner {

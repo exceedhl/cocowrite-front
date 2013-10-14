@@ -7,5 +7,5 @@ define ->
     match 'projects/:uuid', 'documents#index'
     match 'projects/:uuid/', 'documents#index'
     
-    match 'projects/:uuid/:filepath', 'documents#show', name: 'showDocument'
-    match 'projects/:uuid/:filepath/', 'documents#show'
+    match 'projects/:uuid/:filepath/:format/', 'documents#show'
+    match 'projects/:uuid/:filepath/:format', 'documents#show', name: 'showDocument'

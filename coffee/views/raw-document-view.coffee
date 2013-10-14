@@ -2,7 +2,7 @@ define [
   'views/base/view'
   ], (View) ->
 
-  class DocumentView extends View
+  class RawDocumentView extends View
 
     tagName: 'pre'
     template: "{{content}}"

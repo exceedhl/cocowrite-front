@@ -42,6 +42,7 @@ define [
         .done (res) =>
           @showMessage "Your project has been created successfully! <a style='text-decoration: underline; color: #27ae60' href='{{url 'documents#index' '" + res.uuid + "'}}'>Go to take a look</a>.", 'success'
         .fail (res) =>
+          console.log res
           @showMessage res.responseJSON.error, 'error'
         .always (res) =>
           spinner.dispose()

@@ -17,5 +17,5 @@ define [
       'icon-file-text-alt'
     else 
       'icon-folder-close-alt'
-  
+
   null

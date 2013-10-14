@@ -1,0 +1,28 @@
+#toolbar {
+  height: 100%;
+  color: white;
+  background-color: #34495e;
+  padding: 12px 2em;
+  font-weight:100;
+}
+
+#toolbar a {
+  color: #2ecc71;
+}
+
+#toolbar a.active {
+  text-decoration: underline;
+}
+
+#toolbar {
+  text-align: center;
+  
+  .button-group {
+    display: inline-block;
+    
+    button {
+      font-weight: 100;
+    }
+  }
+}
+

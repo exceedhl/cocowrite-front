@@ -1,3 +1,5 @@
+@import "toolbar";
+
 .new-project {
   background-color: #2c3e50;
   height: 100%;
@@ -86,9 +88,23 @@
 }
 
 #doc {
-  height: 100%;
   overflow: auto;
   position: fixed;
-  padding-bottom: 6em;
-  padding-top: 2em;
 }
+
+
+#doc {
+  pre {
+    padding: 2em 2em 6em 2em;
+  }
+  
+  .pdf {
+    height: 100%;
+    
+    iframe {
+      height: 99.5%;
+      width: 100%;
+    }
+  }
+}
+

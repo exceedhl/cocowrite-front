@@ -5,11 +5,13 @@ define [
   'views/project-meta-view',
   'views/project-doclist-view',
   'views/project-path-view',
-  'views/document-view',
+  'views/document-view-factory',
+  'views/project-toolbar-view',
   'models/project',
   'models/documents',
-  'models/document-content',
+  'models/document-content-factory',
   'models/document',
+  'models/document-format'
   'underscore'
 ], (Chaplin,
   NewProjectView,
@@ -17,13 +19,15 @@ define [
   ProjectMetaView,
   ProjectDocListView,
   ProjectPathView,
-  DocumentView,
+  DocumentViewFactory,
+  ProjectToolbarView,
   Project,
   Documents,
-  DocumentContent,
+  DocumentContentFactory,
   Document,
+  DocumentFormat
   _) ->
-
+  
   class DocumentsController extends Chaplin.Controller
 
     beforeAction: (params, route) ->
@@ -41,21 +45,30 @@ define [
         container: '#project .path'
       new ProjectMetaView model: @project, container: '#project .meta'
 
-      @project.fetch()
-        .done (res) => @documents.fetch()
+      @project.fetch().done (res) => @documents.fetch()
   
     initialize: ->
-      @subscribeEvent 'file:selected', @_showFile
+      @subscribeEvent 'file:selected', @_selectFile
+      @subscribeEvent 'format:changed', @_changeFormat
+  
+    _changeFormat: (format) =>
+      @documentFormat.setFormat(format)
+      @_showFile(@document)
 
-    _showFile: (model, filepath = null) =>
-      console.log "showing file: " + model.get('name')
+    _selectFile: (document) =>
+      @document = document
+      @_initDocumentFormat 'raw'
+      @_showFile(@document)
+
+    _showFile: (document, filepath = null) =>
+      console.log "showing file: " + document.get('name')
+      @_showToolbar()
       @documentView.dispose() if @documentView?
-      @documentContent = new DocumentContent document: model, project: @project
-      @documentContent.fetch({dataType: 'html', headers: {'Accept' :'application/vnd.github.VERSION.raw'}})
-        .done =>
-          @documentView = new DocumentView model: @documentContent, container: '#doc'
-      filepath = unless filepath? then @_getFilePath(model.get('name')) else filepath
-      @_changeURL 'showDocument', {uuid: @project.get('uuid'), filepath: filepath}
+      @documentContent = DocumentContentFactory.create document, @project, @documentFormat
+      @documentContent.fetch({dataType: 'html', headers: {'Accept' :'application/vnd.github.VERSION.raw'}}).done =>
+          @documentView = DocumentViewFactory.create @documentContent, '#doc', @documentFormat
+      filepath = unless filepath? then @_getFilePath(document.get('name')) else filepath
+      @_changeURL 'showDocument', {uuid: @project.get('uuid'), filepath: filepath, format: @documentFormat.get('format')}
   
     _changeURL: (route, params) ->
       Chaplin.mediator.execute 'router:changeURL', Chaplin.helpers.reverse(route, params)
@@ -67,7 +80,14 @@ define [
     
     show: (params) ->
       console.log "routed to DC show: " + params['filepath']
-      document = new Document path: params['filepath'], project: @project
-      document.fetch().done => @_showFile(document, params['filepath'])
+      @_initDocumentFormat params['format']
+      @document = new Document path: params['filepath'], project: @project
+      @document.fetch().done => @_showFile(@document, params['filepath'])
+  
+    _initDocumentFormat: (format) ->
+      @documentFormat ?= new DocumentFormat format: format
+  
+    _showToolbar: ->
+      @toolbarView ?= new ProjectToolbarView model: @documentFormat, container: '#toolbar'
 
     index: (params) ->
