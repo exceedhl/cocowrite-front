@@ -65,7 +65,7 @@ define [
       @_showToolbar()
       @documentView.dispose() if @documentView?
       @documentContent = DocumentContentFactory.create document, @project, @documentFormat
-      @documentContent.fetch({dataType: 'html', headers: {'Accept' :'application/vnd.github.VERSION.raw'}}).done =>
+      @documentContent.fetch().done =>
           @documentView = DocumentViewFactory.create @documentContent, '#doc', @documentFormat
       filepath = unless filepath? then @_getFilePath(document.get('name')) else filepath
       @_changeURL 'showDocument', {uuid: @project.get('uuid'), filepath: filepath, format: @documentFormat.get('format')}
@@ -91,3 +91,7 @@ define [
       @toolbarView ?= new ProjectToolbarView model: @documentFormat, container: '#toolbar'
 
     index: (params) ->
+
+    dispose: ->
+      super
+      @documents.dispose()

@@ -15,6 +15,4 @@ define [
     PDFUrl: ->
       @get('links')[0]['href']
   
-    parse: (res)->
-      JSON.parse(res)
     

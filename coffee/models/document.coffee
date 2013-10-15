@@ -10,5 +10,5 @@ define [
       @project = options.project
     
     url: =>
-      "https://api.github.com/repos/" + @project.get('full_name') + "/contents/" + @path
+      @apiRoot + "/github/repos/" + @project.get('full_name') + "/contents/" + @path
 

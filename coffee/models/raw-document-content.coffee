@@ -8,9 +8,12 @@ define [
       super
       @document = options.document
       @project = options.project
+  
+    fetch: ->
+      super({dataType: 'html', headers: {'Accept' :'application/vnd.github.VERSION.raw'}})
       
     url: ->
-      "https://api.github.com/repos/" + @project.get('full_name') + "/git/blobs/" + @document.get('sha')
+      @apiRoot + "/github/repos/" + @project.get('full_name') + "/git/blobs/" + @document.get('sha')
   
     parse: (res)->
       @set 'content', res

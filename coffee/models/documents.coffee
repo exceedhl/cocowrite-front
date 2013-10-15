@@ -1,9 +1,10 @@
 define [
   'chaplin',
-  'models/base/model'
+  'models/base/model',
+  'models/base/collection',
   'models/document',
   'underscore'
-  ], (Chaplin, Model, Document, _) ->
+  ], (Chaplin, Model, Collection, Document, _) ->
 
   class Paths extends Model
     
@@ -25,12 +26,12 @@ define [
     getCombinedPath: ->
       @get('paths').join('/')
     
-  class Documents extends Chaplin.Collection
+  class Documents extends Collection
   
     model: Document
   
     url: =>
-      "https://api.github.com/repos/" + @project.get('full_name') + "/contents/" + @paths.getCombinedPath()
+       @apiRoot + "/github/repos/" + @project.get('full_name') + "/contents/" + @paths.getCombinedPath()
   
     initialize: (options) ->
       @project = options.project

@@ -1,7 +1,8 @@
 define [
-  'chaplin'
+  'chaplin',
+  'config',
   'models/base/model'
-], (Chaplin, Model) ->
+], (Chaplin, config, Model) ->
 
   class Collection extends Chaplin.Collection
     # Mixin a synchronization state machine.
@@ -10,4 +11,4 @@ define [
     # Use the project base model per default, not Chaplin.Model.
     model: Model
 
-    # Place your application-specific collection features here.
+    apiRoot: config.apiRoot    
