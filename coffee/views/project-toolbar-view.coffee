@@ -4,9 +4,9 @@ define [
   ], (View, template) ->
 
   class ProjectToolbarView extends View
-  
+    tagName: 'ul'  
     events:
-      'click button': 'chooseFormat'
+      'click li': 'chooseFormat'
 
     template: template
 
@@ -15,7 +15,7 @@ define [
 
     chooseFormat: (e)->
       target = @$(e.target)
-      @$('button').removeClass('active')
+      @$('li').removeClass('active')
       target.addClass('active')
       @publishEvent('format:changed', target.data('format'))
       

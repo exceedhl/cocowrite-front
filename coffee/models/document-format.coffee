@@ -13,8 +13,8 @@ define [
     isPDF: ->
       @get('format') is 'pdf'
   
-    isRaw: ->
-      @get('format') is 'raw'
+    isText: ->
+      @get('format') is 'text'
   
     isHTML: ->
       @get('format') is 'html'

@@ -16,3 +16,4 @@ define [
     selectDoc: (model) ->
       @collection.pushPath(model.get('name'))
       @collection.fetch()
+  

@@ -1,10 +1,10 @@
 define [
-  'models/raw-document-content',
+  'models/text-document-content',
   'models/pdf-document-content'
-  ], (RawDocumentContent, PDFDocumentContent)->
+  ], (TextDocumentContent, PDFDocumentContent)->
 
   create: (document, project, documentFormat) ->
     cls = switch 
-      when documentFormat.isRaw() then RawDocumentContent
+      when documentFormat.isText() then TextDocumentContent
       when documentFormat.isPDF() then PDFDocumentContent
     new cls document: document, project: project

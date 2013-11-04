@@ -57,7 +57,7 @@ define [
 
     _selectFile: (document) =>
       @document = document
-      @_initDocumentFormat 'raw'
+      @_initDocumentFormat 'text'
       @_showFile(@document)
 
     _showFile: (document, filepath = null) =>
@@ -88,7 +88,7 @@ define [
       @documentFormat ?= new DocumentFormat format: format
   
     _showToolbar: ->
-      @toolbarView ?= new ProjectToolbarView model: @documentFormat, container: '#toolbar'
+      @toolbarView ?= new ProjectToolbarView model: @documentFormat, container: '#doc-toolbar'
 
     index: (params) ->
 
