@@ -1,4 +1,4 @@
 define ->
 
   config =
-    apiRoot: "http://localhost:9000"
+    apiRoot: "http://www.local.xxx:9000"

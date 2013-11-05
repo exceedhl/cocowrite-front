@@ -7,11 +7,13 @@ define [
   'views/project-path-view',
   'views/document-view-factory',
   'views/project-toolbar-view',
+  'views/project-list-view',
   'models/project',
   'models/documents',
   'models/document-content-factory',
   'models/document',
-  'models/document-format'
+  'models/document-format',
+  'models/projects',
   'underscore'
 ], (Chaplin,
   NewProjectView,
@@ -21,11 +23,13 @@ define [
   ProjectPathView,
   DocumentViewFactory,
   ProjectToolbarView,
+  ProjectListView,
   Project,
   Documents,
   DocumentContentFactory,
   Document,
-  DocumentFormat
+  DocumentFormat,
+  Projects,
   _) ->
   
   class DocumentsController extends Chaplin.Controller
@@ -44,6 +48,9 @@ define [
         model: @documents.paths
         container: '#project .path'
       new ProjectMetaView model: @project, container: '#project .meta'
+      @projects = new Projects()
+      @projects.fetch().done =>
+        @projectListView = new ProjectListView container: '.project-list', collection: @projects
 
       @project.fetch().done (res) => @documents.fetch()
   
@@ -94,4 +101,4 @@ define [
 
     dispose: ->
       super
-      @documents.dispose()
+      @documents.dispose() if @documents?

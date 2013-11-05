@@ -50,15 +50,15 @@ module.exports = function(grunt) {
 	
 	watch: {
 	    coffee: {
-		files: 'coffee/**/*.coffee',
+		files: 'coffee/**/[^.]*.coffee',
 		tasks: ['coffee']
 	    },
 	    compass: {
-		files: 'sass/**/*',
+		files: 'sass/**/[^.]*',
 		tasks: ['compass']
 	    },
 	    copy: {
-		files: ['static/**/*', 'coffee/views/templates/**/*'],
+		files: ['static/**/[^.]*', 'coffee/views/templates/**/[^.]*'],
 		tasks: ['copy']
 	    },
 	    bundler: {

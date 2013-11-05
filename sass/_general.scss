@@ -15,6 +15,12 @@ html, body
   bottom: 0;
 }
 
+.major-area {
+  overflow: auto;
+  position: fixed !important;
+  background-color: white;
+}
+
 .logo-area {
   height: 100%;
   color: white;
@@ -36,5 +42,5 @@ html, body
 }
   
 .spinner {
-  text-align: center;
 }
+  

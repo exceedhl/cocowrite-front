@@ -14,6 +14,40 @@
   }
 }
 
+.repo-list {
+  padding: 1em;
+  
+  ul {
+    list-style: none;
+    margin-left: 0;
+  }
+  
+  li {
+    background-color: #ecf0f1;
+    padding: 1em;
+    padding-right: 8em;
+    margin-top: 10px;
+    position: relative;
+    font-weight: 100;
+
+    .spinner {
+      position: absolute;
+      top: 0.7em;
+      right: 4em;
+    }
+  }
+  
+  .repo-name {
+    font-size: 20px;
+  }
+  
+  button {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+  }
+}
+
 #project {
   position: absolute;
   background-color: #ecf0f1;
@@ -91,13 +125,10 @@
 }
 
 #doc {
-  overflow: auto;
-  position: fixed;
-}
-
-
-#doc {
+  border-left: 1px solid #ddd;
+  
   pre {
+    height: 100%;
     padding: 2em 2em 6em 2em;
   }
   

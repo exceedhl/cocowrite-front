@@ -22,22 +22,33 @@
     font-size: 13px;
     padding: 4px 36px;
     
-    &:hover {
+    &.current, &:hover {
       background-color: #597189;
+    }
+  }
+  
+  .profile {
+    padding-bottom: 1em;
+    text-align: center;
+    margin: 4em;
+    bottom: 0;
+    position: absolute;
+    
+    img {
+      width: 80px;
+      @include border-radius(40px, 40px);
+      border: 4px solid #eee;
+    }
+  }
+  
+  .add-project {
+    float: right;
+    cursor: pointer;
+    
+    a {
+      color: white;
+      text-decoration: none;
     }
   }
 }
 
-#menu .profile {
-  padding-bottom: 1em;
-  text-align: center;
-  margin: 4em;
-  bottom: 0;
-  position: absolute;
-  
-  img {
-    width: 80px;
-    @include border-radius(40px, 40px);
-    border: 4px solid #eee;
-  }
-}

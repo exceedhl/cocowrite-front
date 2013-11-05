@@ -6,7 +6,7 @@ define [
   class Project extends Model
         
     url: =>
-      @apiRoot + "/projects/"
+      @apiRoot + "/users/exceedhl/projects/"
   
     methodUrl: (method) ->
       urls = 

@@ -1,6 +1,9 @@
-#doc-toolbar {
+.toolbar {
   height: 100%;
   background-color: white;
+}
+
+#doc-toolbar {
   padding: 0;
   font-weight:100;
   
@@ -27,8 +30,6 @@
 }
 
 #project-toolbar {
-  height: 100%;
-  background-color: white;
   color: #aaa;
   
   .foldin {
