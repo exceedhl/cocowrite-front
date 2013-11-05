@@ -7,13 +7,11 @@ define [
   
     itemView: ProjectDocItemView
   
-    animationDuration: 0
-  
     initialize: ->
       super
-      @subscribeEvent 'dir:selected', @selectDoc
+      @subscribeEvent 'dir:selected', @selectDir
   
-    selectDoc: (model) ->
+    selectDir: (model) ->
       @collection.pushPath(model.get('name'))
       @collection.fetch()
   

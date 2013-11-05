@@ -8,6 +8,7 @@ define [
   'views/document-view-factory',
   'views/project-toolbar-view',
   'views/project-list-view',
+  'views/spinner-view',
   'models/project',
   'models/documents',
   'models/document-content-factory',
@@ -24,6 +25,7 @@ define [
   DocumentViewFactory,
   ProjectToolbarView,
   ProjectListView,
+  SpinnerView,
   Project,
   Documents,
   DocumentContentFactory,
@@ -41,18 +43,27 @@ define [
       @project = new Project uuid: params.uuid
       @documents = new Documents project: @project
 
-      new ProjectDocListView
-        collection: @documents
-        container: '#project .doclist'
       new ProjectPathView
         model: @documents.paths
         container: '#project .path'
       new ProjectMetaView model: @project, container: '#project .meta'
+  
       @projects = new Projects()
       @projects.fetch().done =>
         @projectListView = new ProjectListView container: '.project-list', collection: @projects
 
-      @project.fetch().done (res) => @documents.fetch()
+      spinner = new SpinnerView
+        container: '#refresh-project'
+        type: 'refresh'
+
+      @project.fetch().done (res) =>
+        @documents.fetch().done =>
+          new ProjectDocListView
+            collection: @documents
+            container: '#project .doclist'
+        .always =>
+          spinner.dispose()
+        
   
     initialize: ->
       @subscribeEvent 'file:selected', @_selectFile
