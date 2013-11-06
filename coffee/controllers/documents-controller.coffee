@@ -15,6 +15,7 @@ define [
   'models/document',
   'models/document-format',
   'models/projects',
+  'controllers/base/controller'
   'underscore'
 ], (Chaplin,
   NewProjectView,
@@ -32,11 +33,13 @@ define [
   Document,
   DocumentFormat,
   Projects,
+  Controller,
   _) ->
   
-  class DocumentsController extends Chaplin.Controller
+  class DocumentsController extends Controller
 
     beforeAction: (params, route) ->
+      super
       @view = new ProjectView
         container: 'body'
 
@@ -72,7 +75,7 @@ define [
     _changeFormat: (format) =>
       @documentFormat.setFormat(format)
       @_showFile(@document)
-
+  
     _selectFile: (document) =>
       @document = document
       @_initDocumentFormat 'text'

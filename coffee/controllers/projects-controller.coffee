@@ -5,10 +5,11 @@ define [
   'views/repos-view',
   'views/new-project-view',
   'views/project-list-view',
-  'views/spinner-view'
-], (Chaplin, Repos, Projects, ReposView, NewProjectView, ProjectListView, SpinnerView) ->
+  'views/spinner-view',
+  'controllers/base/controller'
+], (Chaplin, Repos, Projects, ReposView, NewProjectView, ProjectListView, SpinnerView, Controller) ->
 
-  class ProjectsController extends Chaplin.Controller
+  class ProjectsController extends Controller
   
     new: (params) ->
       @newProjectView = new NewProjectView container: 'body'
@@ -27,4 +28,4 @@ define [
       @projects.fetch().done =>
         @projectListView = new ProjectListView container: '.project-list', collection: @projects
       
-            
+      

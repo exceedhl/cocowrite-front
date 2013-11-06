@@ -4,5 +4,5 @@ define [
   'use strict'
 
   class User extends Model
-    # This model is intentionally left blank
-
+    url: ->
+      @apiRoot + "/github/users/exceedhl"

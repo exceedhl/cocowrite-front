@@ -1,7 +1,8 @@
 define [
   'views/base/collection-view',
-  'views/project-docitem-view'
-  ], (CollectionView, ProjectDocItemView) ->
+  'views/project-docitem-view',
+  'views/spinner-view'
+  ], (CollectionView, ProjectDocItemView, SpinnerView) ->
   
   class ProjectDocListView extends CollectionView
   

@@ -1,7 +1,13 @@
-define ['chaplin', 'views/site-view'], (Chaplin, SiteView) ->
+define [
+  'chaplin',
+  'models/user',
+  'views/user-profile-view',
+], (Chaplin, User, UserProfileView) ->
   'use strict'
 
   class Controller extends Chaplin.Controller
-    # Place your application-specific controller features here
     beforeAction: ->
-      @compose 'site', SiteView
+      user = new User()
+      user.fetch().done =>
+        @userProfileView = new UserProfileView container: '.profile', model: user
+
