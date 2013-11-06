@@ -13,7 +13,8 @@
     "requirejs": "~2.1.8",
     "requirejs-hbs": "*",
     "handlebars": "~1.0.0",
-    "requirejs-text": "~2.0.10"
+    "requirejs-text": "~2.0.10",
+    "markdown": "*"
   },
   "overrides": {
     "backbone": {

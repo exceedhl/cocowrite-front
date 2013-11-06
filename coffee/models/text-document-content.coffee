@@ -2,7 +2,7 @@ define [
   'models/base/model'
   ], (Model) ->
 
-  class RawDocumentContent extends Model
+  class TextDocumentContent extends Model
 
     initialize: (options) ->
       super

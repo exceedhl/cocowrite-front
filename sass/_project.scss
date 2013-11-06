@@ -127,15 +127,19 @@
 #doc {
   border-left: 1px solid #ddd;
   
-  pre {
+  .html, .pre {
     height: 100%;
     padding: 2em 2em 6em 2em;
+  }
+
+  .html {
+    color: #555;
   }
   
   .spinner {
     padding: 2em;
   }
-  
+
   .pdf {
     height: 100%;
     
