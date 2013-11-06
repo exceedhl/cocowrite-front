@@ -4,6 +4,7 @@ define [
 ], (View, template) ->
 
   class UserProfileView extends View
+    containerMethod: 'html'
     template: template
   
     getTemplateData: ->

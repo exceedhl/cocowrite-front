@@ -13,9 +13,9 @@ define [
   
     new: (params) ->
       @newProjectView = new NewProjectView container: 'body'
+      @showUserProfile('.profile')
       spinner = new SpinnerView
         container: '.repo-list .spinner'
-        type: 'refresh'
         text: 'Loading github repos ...'
       @repos = new Repos()
       @repos.fetch().done =>

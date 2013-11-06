@@ -6,8 +6,8 @@ define [
   'use strict'
 
   class Controller extends Chaplin.Controller
-    beforeAction: ->
+    showUserProfile: (container)->
       user = new User()
       user.fetch().done =>
-        @userProfileView = new UserProfileView container: '.profile', model: user
+        @userProfileView = new UserProfileView container: container, model: user
 

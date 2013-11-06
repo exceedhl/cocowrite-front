@@ -42,7 +42,7 @@ define [
       super
       @view = new ProjectView
         container: 'body'
-
+      @showUserProfile('.profile')
       @project = new Project uuid: params.uuid
       @documents = new Documents project: @project
 
@@ -66,7 +66,6 @@ define [
             container: '#project .doclist'
         .always =>
           spinner.dispose()
-        
   
     initialize: ->
       @subscribeEvent 'file:selected', @_selectFile
@@ -86,8 +85,10 @@ define [
       @_showToolbar()
       @documentView.dispose() if @documentView?
       @documentContent = DocumentContentFactory.create document, @project, @documentFormat
+      docLoadSpinner = new SpinnerView container: '#doc', text: "Loading ..."
       @documentContent.fetch().done =>
-          @documentView = DocumentViewFactory.create @documentContent, '#doc', @documentFormat
+        docLoadSpinner.dispose()
+        @documentView = DocumentViewFactory.create @documentContent, '#doc', @documentFormat
       filepath = unless filepath? then @_getFilePath(document.get('name')) else filepath
       @_changeURL 'showDocument', {uuid: @project.get('uuid'), filepath: filepath, format: @documentFormat.get('format')}
   
